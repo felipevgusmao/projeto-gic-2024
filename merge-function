@@ -1,0 +1,20 @@
+import pandas as pd
+from google.colab import files
+
+base_2022_path = '/datatran2022.csv'
+base_2023_path = '/datatran2023.csv'
+output_path = '/datatran_combined.csv'
+
+# Ler os arquivos com o delimitador ponto e vírgula e tratando o cabeçalho
+base_2022 = pd.read_csv(base_2022_path, encoding='latin1', delimiter=';')
+base_2023 = pd.read_csv(base_2023_path, encoding='latin1', delimiter=';')
+
+# Concatenar as bases de dados
+base_geral = pd.concat([base_2022, base_2023], ignore_index=True)
+
+# Salvar a base geral em um arquivo CSV
+base_geral.to_csv(output_path, index=False, encoding='latin1')
+
+# Exibir as primeiras linhas da base geral
+display(base_geral.head())
+files.download(output_path)
